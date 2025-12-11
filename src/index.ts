@@ -8,6 +8,7 @@ import {userRoutes} from './routes/user.routes.js';
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 
+const servePort = process.env.SERVER_PORT!;
 const app = new Hono()
 
 const allowed = ['http://localhost:5173', 'https://localhost']
@@ -33,7 +34,7 @@ app.route('/image', imagesRoutes);
 
 serve({
   fetch: app.fetch,
-  port: 3000
+  port: Number(servePort)
 }, (info) => {
   console.log(`Server is running on http://localhost:${info.port}`)
 })
